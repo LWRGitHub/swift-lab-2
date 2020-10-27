@@ -11,7 +11,7 @@ We express the fact that a value is of optional type by putting a question mark 
 */
 var maybeAnInt: Int? = 15
 //: Here, we have expressly given the variable a value of 15, but we could just as easily have assigned it `nil`:
-maybeAnInt = nil
+maybeAnInt = 1
 //: Now `maybeAnInt` is `nil`, which is to say it has _no value_. If `maybeAnInt` had just been of type Int, we could not have set it to `nil`.
 /*:
 ## Unwrapping an Optional
@@ -59,7 +59,7 @@ var alwaysAString: String! = nil
 */
 alwaysAString = "Now I have a value!"
 //: Now, when we print this string, it is implicitly unwrapped to the `String` value it contains:
-print(alwaysAString)
+print(alwaysAString!)
 /*:
  The important takeaway here is that declaring a variable as implicitly unwrapped allows Swift to _automatically_ unwrap the value whenever it is used. This is the inverse of the usual situation: normally, we use the `!` to force-unwrap a value once we're sure it contains a value. With implicitly unwrapped optionals, we assert from the moment we declare the variable that it will _never_ be `nil` when it is used. That can save us a lot of typing (and visual clutter!) for variables that are accessed frequently. But it's important to be 100% sure that the variable is assigned before it's read the first time, because otherwise accessing it will result in a crash.
  */
@@ -73,9 +73,11 @@ In order to call methods on optionals, you must first give Swift something that 
 /*:
  But we're programmers and we like working around the rules. You don't have to give Swift a non-optional if you use a technique called **optional chaining**. Chaining allows you to try to call a method on an optional, which calls the method if the optional has a value, and returns `nil` if it does not. Chaining is performed by placing a question mark between the variable name and the dot, parenthesis, or bracket that follows it:
 */
-let optionalArray: [Int]? = [ 1, 2, 3, 4 ]
+let optionalArray: [Int]? = nil
 let arrayLength = optionalArray?.count
 let firstElement = optionalArray?[0]
+
+print(arrayLength!)
 /*:
  Placing a `?` after the name `optionalArray` will cause Swift to check whether the variable is `nil` before attempting to call `count` or access the array. The types of these expressions are optionals of the same type as the return type of method (so the call to `count`, which normally produces an `Int`, produces an `Int?` in this case). Phew! Still with us?
 
@@ -130,10 +132,23 @@ In this Playground we have looked at some of the capabilities of optionals in Sw
 
 
 // Write your answers here:
-
-
-
-
+//1
+var username: String? = nil
+//2
+print(username!)
+//3
+username = "Logan"
+//4
+print(username!)
+//5
+print(username!)
+//6
+if let username = username{
+    print(username)
+}
+//7
+username = nil
+username ?? "Anonymous"
 
 
 
